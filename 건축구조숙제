@@ -1,0 +1,1416 @@
+1*1=1
+1*2=2 
+1*3=3
+1*4=4
+1*5=5
+1*6=6
+1*7=7
+1*8=8
+1*9=9
+
+2*1=2
+2*2=4
+2*3=6
+2*4=8
+2*5=10
+2*6=12
+2*7=14
+2*8=16
+2*9=18
+
+3*1=3
+3*2=6
+3*3=9
+3*4=12
+3*5=15
+3*6=18
+3*7=21
+3*8=24
+3*9=27
+
+4*1=4
+4*2=8
+4*3=12
+4*4=16
+4*5=20
+4*6=24
+4*7=28
+4*8=32
+4*9=36
+
+5*1=5
+5*2=10
+5*3=15
+5*4=20
+5*5=25
+5*6=30
+5*7=35
+5*8=40
+5*9=45
+
+6*1=6
+6*2=12
+6*3=18
+6*4=24
+6*5=30
+6*6=36
+6*7=42
+6*8=48
+6*9=54
+
+7*1=7
+7*2=14
+7*3=21
+7*4=28
+7*5=35
+7*6=42
+7*7=49
+7*8=56
+7*9=63
+
+8*1=8
+8*2=16
+8*3=24
+8*4=32
+8*5=40
+8*6=48
+8*7=56
+8*8=64
+8*9=72
+
+9*1=9
+9*2=18
+9*3=27
+9*4=36
+9*5=45
+9*6=54
+9*7=63
+9*8=72
+9*9=81
+7*9=63
+
+def bubbleSort(list):
+    unsort_index = len(list) -1
+    unsort = True
+    while(unsort):
+        for i in range(unsort_index):
+            unsort = False
+            if list[i]>list[i+1]:
+                unsort = True
+                #swith
+                temp = list[i+1]
+                list[i+1] = list[i]
+                list[i] = temp
+        # after loop, max value change to rightest position
+        unsort_index = unsort_index -1 # keep decrease right index
+
+
+if __name__ == '__main__':
+    list = [2, 10 , 6, 8, 9]
+    print("Before sort:")
+    print(list)
+    print("")
+    bubbleSort(list)
+    print("After sort:")
+    print(list)
+
+def insertionSort(list):
+    for i in range (1, len(list)):
+        position = i # pick second left as temp value
+        temp_mini = list[i]
+        #when left of poisiton is not negative; compare left value to temp value.
+        #make sure all left value small than temp value
+        while (position-1)>=0 and temp_mini < list[position-1]:
+            # shift value of position -1 to position
+            list[position] = list[position-1]
+            # set position-1 as current positioni
+            position = position -1
+        # after loop,set temp_mini value to position
+        list[position]=temp_mini
+
+
+
+
+if __name__ == '__main__':
+    list = [2, 10 , 6, 8, 9]
+    print("Before sort:")
+    print(list)
+    print("")
+    insertionSort(list)
+    print("After sort:")
+    print(list)
+    
+    # AlgorJavaCsharp
+Question from Youtube Every day a question.  Algor with Csharp and java Solution 
+
+using System;
+
+namespace SelectionSort
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] nums = { 20, 270, 2, 270, 50, 500 };
+            Console.WriteLine("Before Sort:");
+            PrintArray(nums);
+
+
+            SelectionSort(nums);
+
+            Console.WriteLine("After Sort:");
+            PrintArray(nums);
+        }
+
+        private static void SelectionSort(int[] nums)
+        {
+            int minIndex = 0;
+            for(int i = 0; i < nums.Length; i++)
+            {
+                minIndex = i;
+                for(int j =i +1; j < nums.Length; j++)
+                {
+                    // if find new min, store its index
+                    if (nums[j] < nums[minIndex])
+                    {
+                        minIndex = j;
+                    }
+                }
+
+                //switch min to first position.
+                int temp = nums[i];
+                nums[i] = nums[minIndex];
+                nums[minIndex] = temp;
+            }
+        }
+
+
+        static void PrintArray(int[] n)
+        {
+            foreach (var item in n)
+            {
+                Console.Write(item.ToString() + " ");
+            }
+            Console.WriteLine();
+        }
+
+    }
+}
+
+Seletion Sort in C#
+
+using System;
+
+namespace QuickSort
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] nums = { 20, 270, 2, 270, 50, 500 };
+            Console.WriteLine("Before Sort:");
+            PrintArray(nums);
+
+
+            QuickSort(nums, 0, nums.Length-1);
+
+            Console.WriteLine("After Sort:");
+            PrintArray(nums);
+        }
+
+        //Params: array to sort, left index, right index
+        private static void QuickSort(int[] nums, int left, int right)
+        {
+
+            //if left == right, only one item left, no need sort.
+            if(left < right)
+            {
+                //Get the index of element of partiton. 
+                //partitionIndex is the middle value after pivot swap
+                int partitionIndex = Partition(nums, left, right);
+
+                //Use new partition to sort 
+                QuickSort(nums, left, partitionIndex - 1);
+                QuickSort(nums, partitionIndex + 1, right);
+            }
+
+         
+        }
+
+        // This funcion choose right as pivot
+        private static int Partition(int[] nums, int left, int right)
+        {
+            var pivot = right;
+            var smallIndex = left;
+
+            for(int i = left; i<right; i++)//last one is pivot, so i no need to increase to last one
+            {
+                // if current value < pivot, switch the value to small index, and increase small index
+                //otherwise, check next value, small index didn't change.
+                if(nums[i] < nums[pivot])
+                {
+                    var t = nums[smallIndex];
+                    nums[smallIndex] = nums[i];//switch value to small index
+                    nums[i] = t;
+                    smallIndex++;
+                }
+            }
+
+            
+            //switch pivot to smallIndex  .
+            int temp = nums[smallIndex];
+            nums[smallIndex] = nums[pivot];
+            nums[pivot] = temp;
+
+            return smallIndex ;
+
+        }
+
+        static void PrintArray(int[] n)
+        {
+            foreach (var item in n)
+            {
+                Console.Write(item.ToString() + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+QuickSort
+right end is pivot.
+
+//Use BFS to search denote all the bombs
+//Then check how many bombs left
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+
+
+namespace AlgBigBomb
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[][] field =
+            {
+                new[]{0,1,0,0,0,0},
+                new[]{0,1,0,0,0,0},
+                new[]{1,1,1,1,0,0},
+                new[]{0,0,1,0,0,0},
+                new[]{0,1,1,1,1,1},
+                new[]{1,1,1,1,1,1}
+
+            };
+            //check field fist
+            View(field);
+            //denote bomb
+            var solution = new Solution();
+            var counter = solution.DeBomb(field, 0, 3);
+
+            //Console.WriteLine(counter);
+            Console.WriteLine("Bombs left: {0} ", counter);
+            Console.WriteLine();
+            View(field);
+
+        }
+
+        static void View(int[][] field)
+        {
+            foreach(var r in field)
+            {
+                Console.WriteLine(String.Join("", r));
+                
+            }
+        }
+    }
+}
+
+// Give a 2-d array with 0, 1
+// 1 is bomb, 
+// if denote certain position, the bomb will change to 0, and also denote its neighbors
+//find how many bombs left after denote 
+
+//Use BFS to search denote all the bombs
+//Then check how many bombs left
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgBigBomb
+{
+    class Solution
+    {
+
+        public int DeBomb(int[][] field, int row, int col)
+        {
+            int h = field.Length, w = field[0].Length;
+            int[][] directions =
+            {
+                new[]{-1,0},//up neighbor
+                new[]{1,0}, // down neighbor
+                new[]{0,-1}, //left neighbor
+                new[]{0,1}
+            };
+
+            field[row][col] = 0; // where to place bomb, it will change to zero
+            //use BFS to find 
+            var q = new Queue<int>();
+            q.Enqueue(row);
+            q.Enqueue(col);
+            while (q.Count > 0)
+            {
+                // dequeue center item first
+                int cr = q.Dequeue();
+                int cc = q.Dequeue();
+
+                // get neighbor items
+                foreach (var dir in directions)
+                {
+                    int nr = cr + dir[0];
+                    int nc = cc + dir[1];
+
+                    //check neighbor and enqueue, 
+                    if (nr >= 0 && nr < h && nc >= 0 && nc < w)
+                    {
+                        //if neighbor is also a bomb
+                        if (field[nr][nc] == 1)
+                        {
+                            field[nr][nc] = 0;
+                            q.Enqueue(nr);
+                            q.Enqueue(nc);
+                        }
+                    }
+
+                }
+
+            }//while loop end
+
+            //after denote all the bomb, check how many bombs left
+            int counter = 0;
+            for (int r = 0; r < h; r++)
+            {
+                for (int c = 0; c < w; c++)
+                {
+                    //loop the 2-d array
+                    counter = counter + field[r][c];//if is  bomb, it increase 1, otherwise increase 0, 
+
+                }
+            }
+            return counter;
+
+        }
+
+
+
+
+
+
+
+
+    }
+}
+
+// PRINT out every neighbors in 2-D array.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace AccessNerighbors
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[][] m =
+            {
+                new[] {1,2,3,4},
+                new[] {5,6,7,8},
+                new[] {9,10,11,12}
+            };
+            var solution = new Solution();
+            solution.AccessNeighbor2(m);
+        }
+    }
+}
+
+Given a 2D arrays. 
+Print out neighbors of every items.
+
+// PRINT out every neighbors in 2-D array.
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AccessNerighbors
+{
+    class Solution
+    { 
+        //This methods use 2 for loops, out loop is row, inner loop is col 
+        public void AccessNeighbor1(int[][] m)
+        {
+            int h = m.Length, w = m[0].Length;
+            for(int row=0; row<h; row++)
+            {
+                for(int col=0; col<w; col++)
+                {
+                    Console.WriteLine($"Home:{m[row][col]}\t");
+                    //check up neighbor and print, 
+                    if (row - 1 >= 0) Console.WriteLine(m[row-1][col]);
+
+                    //check down neighbor and print, 
+                    if (row + 1 < h) Console.WriteLine(m[row + 1][col]);
+
+                    //check left neighbor and print, 
+                    if (col - 1 >= 0) Console.WriteLine(m[row][col-1]);
+
+
+                    //check left neighbor and print, 
+                    if (col + 1 < w) Console.WriteLine(m[row][col + 1]);
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        // This methods use a new array to replace neighbors
+        // so we can skip 4 if sentence
+        public void AccessNeighbor2(int[][] m)
+        {
+            int h = m.Length, w = m[0].Length;
+            int[][] directions =
+            {
+                new[]{-1,0},//up neighbor
+                new[]{1,0}, // down neighbor
+                new[]{0,-1}, //left neighbor
+                new[]{0,1}
+            };
+
+            for (int row = 0; row < h; row++)
+            {
+                for (int col = 0; col < w; col++)
+                {
+                    Console.Write($"Home:{m[row][col]}\t");
+                    foreach(var dir in directions)
+                    {
+                        int nr = row + dir[0];
+                        int nc = col + dir[1];
+
+                        //check neighbor and print, 
+                        if (nr>=0 && nr<h && nc>=0 && nc<w )
+                        {
+                            Console.Write($"{m[nr][nc]}\t");                            
+                        }
+                        
+                    }
+                    Console.WriteLine();
+
+                }
+            }
+        }
+
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Alg7PhoneNumber
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var phoneNumber = "234";
+
+            var s = new Solution();
+            var result = s.Combinations(phoneNumber);
+            Console.WriteLine(String.Join("\n", result));
+        }
+    }
+}
+
+give a digits(exclude 0,1 ), for example "213777",
+print all the possilbe letter combination.
+
+Use BFS methods.
+First, build a queue. 
+Then, deque a item, 
+if item euqal digits lenght, meaning we got a combination.
+else, loop the next digits possible letter and combine with dequed item
+add combined new item to the queue.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+//find all possible letter combinations for given digits phone number
+// the length of phone number is not fixed
+
+namespace Alg7PhoneNumber
+{
+    class Solution
+    {
+        public List<string> Combinations(string digits)
+        {
+            var dict = new Dictionary<char, char[]> {
+                {'2', new[]{'a','b','c'} },
+                {'3', new[]{'d','e','f'} },
+                {'4', new[]{'g','h','i'} },
+                {'5', new[]{'j','k','l'} },
+                {'6', new[]{'m','n','o'} },
+                {'7', new[]{'q','r','s'} },
+                {'8', new[]{'t','u','v'} },
+                {'9', new[]{'w','x','y', 'z' } },
+
+            };//dict end
+
+            var result = new List<string>();
+
+            if (String.IsNullOrEmpty(digits)) return result;// if input is empty, return result.
+
+            var q = new Queue<string>();
+            q.Enqueue(String.Empty);
+
+            while (q.Count > 0)//while queue is not empty
+            {
+                var n = 0;
+                var cur = q.Dequeue(); // get a item
+                // if the item lenght equal digit lengh, meaning, we got a comibination and add it to result
+                if (cur.Length == digits.Length)
+                {
+                    result.Add(cur);
+                }
+                else
+                {
+                    foreach (var c in dict[digits[n]])
+                    {
+                        q.Enqueue(cur+c);
+                        //Console.WriteLine(cur+c);
+                    }
+                    n = n + 1;// after run over current digit, move to next digit
+                }
+                
+            }
+
+            return result;
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace Alg7PhoneNumber
+{
+    // This solution, use array to replace dictionary
+    class Solution2
+    {
+
+        public List<string> Combinations(string digits)
+        {
+
+            String[] str1;
+            str1 = new String[] { null, null, "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+           
+
+            var result = new List<string>();
+
+            if (String.IsNullOrEmpty(digits)) return result;// if input is empty, return result.
+
+            var q = new Queue<string>();
+            q.Enqueue(String.Empty);
+
+            while (q.Count > 0)//while queue is not empty
+            {
+                
+                var cur = q.Dequeue(); // get a item
+                // if the item lenght equal digit lengh, meaning, we got a comibination and add it to result
+                if (cur.Length == digits.Length)
+                {
+                    result.Add(cur);
+                }
+                else
+                {
+                    var n = cur.Length;
+                    foreach (var c in str1[digits[n]-'0'])// digits[n] get a char nubmer '2', then minus '0', change to digit.
+                    {
+                        q.Enqueue(cur + c);
+                        //Console.WriteLine(cur+c);
+                    }
+                    
+                }
+
+            }
+
+            return result;
+        }
+
+
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Alg6_2Dto1D
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[][] m = new[]
+            {
+                new[]{1,2,3,4},
+                new[]{10,11,12,5},
+                new[]{9,8,7,6}
+            };
+
+           //Console.WriteLine(m[0].Length);
+            
+           for(int i=0; i< m.Length; i++)
+            {
+                for(int j=0; j<m[i].Length; j++)
+                {
+                    Console.Write(m[i][j]+" ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+
+            var result = Solution.Convert(m);
+            Console.WriteLine(String.Join("->", result));
+
+        }//Main end
+    }
+}
+
+Convert a 2D array to 1 D array.
+Convert sequence, top--right--bottom--left
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Alg6_2Dto1D
+{
+    class Solution
+    {
+        public static int[] Convert(int[][] m)
+        {
+            //check if m is empty
+            if (m == null) return new int[0];
+            
+            // start row and col of converted
+            int row = 0, col = 0;
+            //set area of converted high and wide
+            int high = m.Length, wide = m[0].Length;
+            int p = 0;
+            int[] result=new int[high*wide];
+
+            while (true)
+            {
+                //exit condition
+                if (high == 0 || wide == 0) break;
+                //covernt the top row
+                for(int c=col; c < col + wide; c++)
+                {
+                    result[p] = m[row][c];
+                    p++;
+                }
+                row = row + 1;//after coverted one row, start row number increase 1
+                high = high - 1;
+
+
+                //exit condition
+                if (high == 0 || wide == 0) break;
+                //covernt the right col
+                for (int r = row; r < row + high; r++)
+                {
+                    result[p] = m[r][col+wide -1];
+                    p++;
+                }              
+                wide = wide - 1;
+
+                //exit condition
+                if (high == 0 || wide == 0) break;
+                //covernt the bottom row
+                for (int c = col+wide-1; c > col; c--)
+                {
+                    result[p] = m[row+high-1][c];
+                    p++;
+                }
+
+                //exit condition
+                if (high == 0 || wide == 0) break;
+                //covernt the left col
+                for (int r = row + high - 1; r >= row; r--)
+                {
+                    result[p] = m[r][col];
+                    p++;
+                }
+                col = col + 1;
+                wide = wide - 1;
+            }
+            
+            return result;
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Alg5Permute
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var s = new Solution();
+            //var result = s.Permute(3);
+            var result = s.Parentheses(3);
+            foreach (String str in result)
+            {
+                Console.WriteLine(str);
+            }
+        }
+    }
+}
+
+Two slightly different questions:
+
+1 Permute pairs of Female and Male 
+# F: Female; M: Male
+# Input n - paris of females and males
+# Output a list of all combinations
+
+
+2 Permute pairs of "(" ")"    Solution use DFS methods.
+# It will be simliar to above question, 
+# except add one more Restriction: Female first, total number of Females seated must be larger than total Males seated
+
+
+
+3 Another solution for paris of  "(" ")"  Solution by valide all possible pairs
+# Generate all the combinations, then valide one by one
+# it is as good as DFS.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Alg5Permute
+{
+    class Solution
+    {
+        private List<String> result;
+
+        //n is the pairs will attend
+        public List<String> Permute(int n)
+        {
+            result = new List<String>();
+            DFS(n, 1, 0, "F");//Start with first one is female
+            DFS(n, 0, 1, "M");//Start with first one is male
+            return result;
+        }
+
+        //DFS recursive arrange female, male
+        private void DFS(int n, int fc, int mc, String solution)
+        {
+            //if fc==n meaning all female has arranged 
+            if (fc == n && mc == n)
+            {
+                result.Add(solution);
+                return;
+            }
+
+            if (fc < n) DFS(n, fc + 1, mc, solution + "F");//if fc less than n, add one more female to arrange
+            if (mc < n) DFS(n, fc, mc + 1, solution + "M");//if mc less than n, add one more male to arrange
+        }
+
+        /*-----------------------------------------------------------*/
+        //Add one more condition, "Lady first", meaning F always >= M. 
+        // Replace F with "(", M with ")", it will be Pair Parentheses Problem
+        public List<String> Parentheses(int n)
+        {
+            result = new List<String>();
+            DFSParenth(n, 1, 0, "(");//Start with first one is female            
+            return result;
+        }
+
+        //DFS recursive arrange female, male
+        private void DFSParenth(int n, int fc, int mc, String solution)
+        {
+            //if fc==n meaning all female has arranged 
+            if (fc == n && mc == n)
+            {
+                result.Add(solution);
+                return;
+            }
+
+            if (fc < n) DFSParenth(n, fc + 1, mc, solution + "(");//if fc less than n, add one more female to arrange
+            if (mc < fc) DFSParenth(n, fc, mc + 1, solution + ")");//mc always <= fc
+        }
+        
+        
+        /*-----------------------------------------------------------*/
+        //Another way, generate all parenthese first, then valid the corret pairs.
+        //whenever, "(" > "(", remove this soluion.
+        public List<String> Valid(List<String> originalResult)
+        {
+            List<String> copyResult = new List<String>();//Create a list to deep copy origianlResult
+            foreach(var i in originalResult)
+            {
+                copyResult.Add(i);
+            }
+
+            var balance = 0;
+            Boolean rm;
+            List<String> rmList = new List<String>();// Create a list to record removed data location                       
+
+            foreach (var i in copyResult)
+            {
+                rm = false;
+                foreach (char c in i)
+                {
+                    if (c == 'F') balance++;
+                    if (c == 'M') balance--;
+                    if (balance < 0) rm = true;
+                }
+                if (rm)
+                {
+                    //Console.WriteLine("Need to remove!");
+                    rmList.Add(i);
+                }
+            }  
+            foreach(var m in rmList)
+            {
+                copyResult.Remove(m);
+            }
+            return copyResult;
+        }
+
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Alg4CloneTree
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] a = { 1, 2, 3, 4, 5, 6, 7 };
+            Node tree = Util.BuildTree(a, 0, a.Length - 1);
+            Console.WriteLine();
+            //Console.WriteLine(tree.val); //print Tree root
+            Console.WriteLine("Deep first In order loop the tree: ");
+            Util.DFS(tree);
+            Console.WriteLine( );
+            //Console.WriteLine("Deep first pre order loop the tree: ");
+            //Util.DFSPreOrder(tree);
+
+            Console.WriteLine("Breadth first loop the tree: ");
+            Util.BFS(tree);
+            Console.WriteLine();
+
+            //Clone Tree
+            Node newTree = Util.CloneTree(tree);
+            Console.WriteLine("Deep first In order loop the tree: ");
+            Util.DFS(newTree);
+            Console.WriteLine();
+        }
+    }
+}
+
+1 Code for Bread first traversal a tree.
+2 Code for clone a new tree by Bread first traversal .
+3 1 Code for DFS a tree(PreOrder, inOrder).
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Alg4CloneTree
+{
+    class Node
+    {
+        public int val;
+        public Node left;
+        public Node right;
+
+        //Construtor, set value, pointer default null;
+        public Node(int val)
+        {
+            this.val = val;
+        }
+    }
+
+    class Util
+    {
+        // recurvise method to build a balance tree, from an ordered array
+        public static Node BuildTree(int[] a, int li, int hi)
+        {
+            if (hi < li) return null;
+            int mi = li + (hi - li) / 2;
+
+            Node node = new Node(a[mi]); // Set the middle value as up root
+            //Console.WriteLine("Current node: " + node.val);
+            node.left = BuildTree(a, li, mi-1);
+            node.right = BuildTree(a, mi + 1, hi);            
+
+
+            return node;//return root
+        }
+
+        //Deep first search In order and print every node value
+        public static void DFS(Node root)
+        {
+            if (root == null) return;
+            DFS(root.left);
+            Console.Write(root.val + " ");
+            DFS(root.right);
+        }
+
+        //Deep first search In order and print every node value
+        public static void DFSPreOrder(Node root)
+        {
+            if (root == null) return;
+            Console.Write(root.val + " ");
+            DFSPreOrder(root.left);            
+            DFSPreOrder(root.right);
+        }
+
+        //Bread first search  and print every node value
+        public static void BFS(Node root)
+        {
+            Queue<Node> q = new Queue<Node>();
+            q.Enqueue(root);
+            while (q.Count > 0)
+            {
+                //dequeue one node, then check enqueue his children.
+                Node temp = q.Dequeue();
+                Console.Write(temp.val + " ");
+                if (temp.left != null)
+                {
+                    q.Enqueue(temp.left);
+                }
+                if (temp.right != null)
+                {
+                    q.Enqueue(temp.right);
+                }
+            }           
+
+        }
+
+        //Clone the a new tree by Bread first search 
+        public static Node CloneTree(Node root)
+        {
+            Queue<Node> q = new Queue<Node>();
+            //create a root of new tree and enqueue
+            Node newRoot = new Node(root.val);
+            q.Enqueue(root);
+            q.Enqueue(newRoot);
+            while (q.Count > 0)
+            {
+                //dequeue one node, then check enqueue his children.
+                Node temp = q.Dequeue();
+                Node cloned = q.Dequeue();
+                
+                if (temp.left != null)
+                {
+                    cloned.left = new Node(temp.left.val);
+                    q.Enqueue(temp.left);
+                    q.Enqueue(cloned.left);
+                }
+                if (temp.right != null)
+                {
+                    cloned.right = new Node(temp.right.val);
+                    q.Enqueue(temp.right);
+                    q.Enqueue(cloned.right);
+                }
+            }
+            return newRoot;
+
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Alg3CountPairs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] nums = { 20, 260, 20, 260, 500, 500 };
+            PrintArray(nums);
+            
+            
+            int result = CounterNoSort(nums, 520);
+            Console.WriteLine("Count number:");
+            Console.WriteLine(result);
+
+        }
+
+        //Counter without Sort .
+        static int CounterNoSort(int[] n, int target)
+        {
+            var count = 0;
+            var dict = new Dictionary<int, int>();// key is the array value, value is the times in the array.
+            foreach(var i in n)
+            {
+                var diff = target - i;
+                if(dict.ContainsKey(diff))//found the other number in the dict(come from array)
+                {
+                    count++;
+                    dict[diff]--;
+                    if(dict[diff] == 0)
+                    {
+                        dict.Remove(diff);//Number can repeat, but only use one time.
+                    }
+                }
+                else//not found the other number, add current i to the dict
+                {
+                    if (!dict.ContainsKey(i))
+                    {
+                        dict[i] = 0;
+                    }
+                    dict[i]++;
+                }
+            }
+
+            return count;
+        }
+
+        //Sort first, then count pairs numbers to be target.
+        static int Counter(int[] n, int target)
+        {
+            var count = 0;
+            // sort first
+            Array.Sort(n);
+            int l = 0, r = n.Length - 1;
+            while (l<r)
+            {
+                if (n[l] + n[r] < target)
+                {
+                    l++;
+                }
+                else if (n[l] + n[r] > target)
+                {
+                    r--;
+                }
+                else
+                {
+                    count++;
+                    l++;
+                    r--;
+                }
+            }
+            return count;
+        }
+
+        static void PrintArray(int[] n)
+        {
+            foreach(var item in n)
+            {
+                Console.Write(item.ToString() + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+Given an array, and a target number;
+Find how many pairs numbers the value will be target.
+Methods one: sort array first. Then from left and right to test the value of left + right
+Mehods two: without sort array, add a new dict, then loop the array, if diff beween target and n not in the dict, add n to the dict.
+
+//Combine two list on-site.
+
+import java.lang.reflect.Array;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        int[] listArray1 = new int[]{1, 3, 5, 7, 7, 9,10};
+        int[] listArray2 = new int[]{2, 6, 7, 8};
+        //convert array to node link list
+        Node list1 = makeList(listArray1);
+        printList(list1);
+
+        Node list2 = makeList(listArray2);
+        printList(list2);
+
+        Node result = zipTwoList(list1, list2);
+        printList(result);
+
+
+    }
+
+    private static Node zipTwoList(Node p, Node q) {
+        Node head = new Node();
+        Node current = head;
+        while(p!=null && q!=null){
+            if (p.val <= q.val){
+                current.next=p;
+                p = p.next;
+            }
+            else{
+                current.next=q;
+                q=q.next;
+            }
+            current = current.next;
+        }
+
+        // deal with longer list
+        if(p == null){
+            current.next = q;
+        }
+        else{
+            current.next = p;
+        }
+
+
+        return head.next;
+
+    }
+
+    private static void printList(Node list) {
+
+
+        while (list !=null){
+            System.out.print(list.val + "->");
+            list = list.next;
+        }
+        System.out.println();
+    }
+
+    private static Node makeList(int[] a) {
+        Node head = null;
+        for(int i=a.length-1; i>=0; i--){
+            Node temp = new Node();
+            temp.val=a[i];
+            temp.next=head;
+            head = temp;
+        }
+
+        return head;
+    }
+}
+
+//create a node class
+
+public class Node {
+    public int val;
+    public Node next;
+
+}
+
+//This Program to combine two list in site.
+
+using System;
+
+namespace ZipTwoList
+{
+    class Node
+    {
+        public int val;
+        public Node next;
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Zip Two List!");
+            var list1 = MakeList(1, 3, 5, 7, 7, 9);
+            var list2 = MakeList(2, 6, 7, 8);
+            PrintList(list1);
+            PrintList(list2);
+
+            Node zipper = ZipList(list1, list2);
+            PrintList(zipper);
+        }
+
+        static Node MakeList(params int[] a)
+        {
+            Node head = null;
+            //Node head = new Node();
+            for (int i = a.Length - 1; i >= 0; i--)
+            {
+                head = new Node { val = a[i], next = head };
+
+            }
+
+            return head;
+        }
+
+        static void PrintList(Node list)
+        {
+            while (list != null)
+            {
+                Console.Write("{0} -> ", list.val);
+                list = list.next;
+            }
+            Console.WriteLine();
+        }
+
+        static Node ZipList(Node p, Node q)
+        {
+            Node head = new Node();// Node head = null; it is not right. It didn't has next act.
+            Node current = head;
+            while (p!=null && q!=null)
+            {
+                if(p.val <= q.val)
+                {
+                    current.next = p;                    
+                    p = p.next;
+                }
+                else
+                {
+                    current.next = q;                    
+                    q = q.next;
+                }
+                current = current.next;                
+            }
+
+            /*
+            if (p == null)
+            {
+                current.next = q;
+            }
+            else
+            {
+                current.next = p;
+            }
+            */
+            //revise above to one line with Ternary operator
+            current.next = p== null ? (q) : (p);
+
+
+            return head.next;
+        }
+    }
+}
+
+Combine two list onsite.
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) {
+	// write your code here
+        System.out.println("Hello!");
+        int[] arr= {1,2,3,4,5,6,7,8,9};
+        System.out.println(Arrays.toString(arr));
+
+        int l=0, r=arr.length-1;
+        int temp;
+        while (l<r){
+            temp = arr[l];
+            arr[l] = arr[r];
+            arr[r] = temp;
+            l++;
+            r--;
+        }
+        System.out.println("After Reverse:");
+        System.out.println(Arrays.toString(arr));
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Alg1ReverseArray
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 2, 3, 4, 5, 6, 7, 8, 9 };
+            Console.WriteLine("Before Reverse ");
+            Console.WriteLine(String.Join(",", arr));
+
+            int left = -1;
+            int right = arr.Length;
+            int temp;
+
+            while(left++ < right--)
+            {
+                //Console.WriteLine("left: {0}", left);
+                //Console.WriteLine("right: {0}", right);
+                temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+                //left++;
+                //right--;
+            }
+
+            Console.WriteLine("After Reverse ");
+            Console.WriteLine(String.Join(",", arr));
+
+
+        }
+    }
+}
+
+Simple Reverve An int Array.
+
+
+
